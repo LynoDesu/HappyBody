@@ -1,27 +1,18 @@
 ﻿using System;
-
+using HappyBodyApp.Abstractions;
+using HappyBodyApp.Services;
 using Xamarin.Forms;
 
 namespace HappyBodyApp
 {
     public partial class App : Application
     {
-        public static bool UseMockDataStore = true;
-        public static string BackendUrl = "https://localhost:5000";
+        public static ICloudService CloudService { get; set; }
 
         public App()
         {
-            InitializeComponent();
-
-            if (UseMockDataStore)
-                DependencyService.Register<MockDataStore>();
-            else
-                DependencyService.Register<CloudDataStore>();
-
-            if (Device.RuntimePlatform == Device.iOS)
-                MainPage = new MainPage();
-            else
-                MainPage = new NavigationPage(new MainPage());
+            CloudService = new AzureCloudService();
+            MainPage = new NavigationPage(new Pages.EntryPage());
         }
     }
 }
