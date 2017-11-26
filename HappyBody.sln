@@ -1,0 +1,17 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyBodyBackend", "HappyBodyBackend\HappyBodyBackend.csproj", "{CC4604DE-AD36-41DC-B479-40D28B885DBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC4604DE-AD36-41DC-B479-40D28B885DBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC4604DE-AD36-41DC-B479-40D28B885DBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC4604DE-AD36-41DC-B479-40D28B885DBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC4604DE-AD36-41DC-B479-40D28B885DBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
