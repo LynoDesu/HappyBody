@@ -9,11 +9,11 @@ using Xamarin.Forms;
 
 namespace HappyBodyApp.ViewModels
 {
-    public class TaskListViewModel : BaseViewModel
+    public class MealListViewModel : BaseViewModel
     {
-        public TaskListViewModel()
+        public MealListViewModel()
         {
-            Title = "Task List";
+            Title = "Meal List";
             RefreshList();
         }
 
@@ -33,7 +33,7 @@ namespace HappyBodyApp.ViewModels
                 SetProperty(ref selectedItem, value, "SelectedItem");
                 if (selectedItem != null)
                 {
-                    Application.Current.MainPage.Navigation.PushAsync(new Pages.TaskDetail(selectedItem));
+                    Application.Current.MainPage.Navigation.PushAsync(new Pages.MealDetail(selectedItem));
                     SelectedItem = null;
                 }
             }
@@ -77,7 +77,7 @@ namespace HappyBodyApp.ViewModels
 
             try
             {
-                await Application.Current.MainPage.Navigation.PushAsync(new Pages.TaskDetail());
+                await Application.Current.MainPage.Navigation.PushAsync(new Pages.MealDetail());
             }
             catch (Exception ex)
             {
@@ -92,7 +92,7 @@ namespace HappyBodyApp.ViewModels
         async Task RefreshList()
         {
             await ExecuteRefreshCommand();
-            MessagingCenter.Subscribe<TaskDetailViewModel>(this, "ItemsChanged", async (sender) =>
+            MessagingCenter.Subscribe<MealDetailViewModel>(this, "ItemsChanged", async (sender) =>
             {
                 await ExecuteRefreshCommand();
             });

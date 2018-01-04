@@ -7,12 +7,12 @@ using Xamarin.Forms;
 
 namespace HappyBodyApp.Pages
 {
-    public partial class TaskDetail : ContentPage
+    public partial class MealDetail : ContentPage
     {
-        public TaskDetail(TodoItem item = null)
+        public MealDetail(TodoItem item = null)
         {
             InitializeComponent();
-            BindingContext = new TaskDetailViewModel(item);
+            BindingContext = new MealDetailViewModel(item);
         }
     }
 }
