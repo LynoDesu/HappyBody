@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Abstractions\TableData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\AzureCloudTable.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\TodoItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Abstractions\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\EntryPage.xaml.cs">
       <DependentUpon>EntryPage.xaml</DependentUpon>
@@ -31,6 +30,8 @@
       <DependentUpon>MealDetail.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MealDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Ingredient.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Meal.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />

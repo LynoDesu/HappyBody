@@ -16,12 +16,17 @@ namespace Backend.Models
         }
 
         public DbSet<TodoItem> TodoItems { get; set; }
+        public DbSet<Meal> Meals { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Add(
                 new AttributeToColumnAnnotationConvention<TableColumnAttribute, string>(
                     "ServiceTableColumn", (property, attributes) => attributes.Single().ColumnType.ToString()));
+
+            modelBuilder.Entity<Meal>()
+                        .HasMany(t => t.Ingredients);
         }
     }
 }

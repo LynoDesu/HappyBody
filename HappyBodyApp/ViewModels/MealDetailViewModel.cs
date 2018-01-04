@@ -9,23 +9,23 @@ namespace HappyBodyApp.ViewModels
 {
     public class MealDetailViewModel : BaseViewModel
     {
-        ICloudTable<TodoItem> table = App.CloudService.GetTable<TodoItem>();
+        ICloudTable<Meal> table = App.CloudService.GetTable<Meal>();
 
-        public MealDetailViewModel(TodoItem item = null)
+        public MealDetailViewModel(Meal item = null)
         {
             if (item != null)
             {
                 Item = item;
-                Title = item.Text;
+                Title = item.Description;
             }
             else
             {
-                Item = new TodoItem { Text = "New Meal", Complete = false };
+                Item = new Meal { Description = "New Meal" };
                 Title = "New Meal";
             }
         }
 
-        public TodoItem Item { get; set; }
+        public Meal Item { get; set; }
 
         Command cmdSave;
         public Command SaveCommand => cmdSave ?? (cmdSave = new Command(async () => await ExecuteSaveCommand()));

@@ -17,15 +17,15 @@ namespace HappyBodyApp.ViewModels
             RefreshList();
         }
 
-        ObservableCollection<TodoItem> items = new ObservableCollection<TodoItem>();
-        public ObservableCollection<TodoItem> Items
+        ObservableCollection<Meal> items = new ObservableCollection<Meal>();
+        public ObservableCollection<Meal> Items
         {
             get { return items; }
             set { SetProperty(ref items, value, "Items"); }
         }
 
-        TodoItem selectedItem;
-        public TodoItem SelectedItem
+        Meal selectedItem;
+        public Meal SelectedItem
         {
             get { return selectedItem; }
             set
@@ -50,7 +50,7 @@ namespace HappyBodyApp.ViewModels
 
             try
             {
-                var table = App.CloudService.GetTable<TodoItem>();
+                var table = App.CloudService.GetTable<Meal>();
                 var list = await table.ReadAllItemsAsync();
                 Items.Clear();
                 foreach (var item in list)
@@ -58,7 +58,7 @@ namespace HappyBodyApp.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error loading items: {ex.Message}");
+                Debug.WriteLine($"[MealList] Error loading items: {ex.Message}");
             }
             finally
             {
@@ -81,7 +81,7 @@ namespace HappyBodyApp.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskList] Error in AddNewItem: {ex.Message}");
+                Debug.WriteLine($"[MealList] Error in AddNewItem: {ex.Message}");
             }
             finally
             {
