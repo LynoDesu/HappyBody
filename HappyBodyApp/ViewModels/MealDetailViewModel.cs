@@ -7,11 +7,11 @@ using Xamarin.Forms;
 
 namespace HappyBodyApp.ViewModels
 {
-    public class TaskDetailViewModel : BaseViewModel
+    public class MealDetailViewModel : BaseViewModel
     {
         ICloudTable<TodoItem> table = App.CloudService.GetTable<TodoItem>();
 
-        public TaskDetailViewModel(TodoItem item = null)
+        public MealDetailViewModel(TodoItem item = null)
         {
             if (item != null)
             {
@@ -20,8 +20,8 @@ namespace HappyBodyApp.ViewModels
             }
             else
             {
-                Item = new TodoItem { Text = "New Item", Complete = false };
-                Title = "New Item";
+                Item = new TodoItem { Text = "New Meal", Complete = false };
+                Title = "New Meal";
             }
         }
 
@@ -46,12 +46,12 @@ namespace HappyBodyApp.ViewModels
                 {
                     await table.UpdateItemAsync(Item);
                 }
-                MessagingCenter.Send<TaskDetailViewModel>(this, "ItemsChanged");
+                MessagingCenter.Send<MealDetailViewModel>(this, "ItemsChanged");
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskDetail] Save error: {ex.Message}");
+                Debug.WriteLine($"[MealDetail] Save error: {ex.Message}");
             }
             finally
             {
@@ -74,12 +74,12 @@ namespace HappyBodyApp.ViewModels
                 {
                     await table.DeleteItemAsync(Item);
                 }
-                MessagingCenter.Send<TaskDetailViewModel>(this, "ItemsChanged");
+                MessagingCenter.Send<MealDetailViewModel>(this, "ItemsChanged");
                 await Application.Current.MainPage.Navigation.PopAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"[TaskDetail] Save error: {ex.Message}");
+                Debug.WriteLine($"[MealDetail] Save error: {ex.Message}");
             }
             finally
             {

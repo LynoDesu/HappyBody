@@ -23,14 +23,14 @@
       <DependentUpon>EntryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EntryPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\TaskList.xaml.cs">
-      <DependentUpon>TaskList.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MealList.xaml.cs">
+      <DependentUpon>MealList.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TaskListViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\TaskDetail.xaml.cs">
-      <DependentUpon>TaskDetail.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MealListViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MealDetail.xaml.cs">
+      <DependentUpon>MealDetail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TaskDetailViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MealDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
@@ -38,11 +38,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\TaskList.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\MealList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\TaskDetail.xaml">
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Pages\MealDetail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>

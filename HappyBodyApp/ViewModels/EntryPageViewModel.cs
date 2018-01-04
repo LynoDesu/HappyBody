@@ -10,7 +10,7 @@ namespace HappyBodyApp.ViewModels
     {
         public EntryPageViewModel()
         {
-            Title = "Task List";
+            Title = "Add Meal";
         }
 
         Command loginCmd;
@@ -24,7 +24,7 @@ namespace HappyBodyApp.ViewModels
 
             try
             {
-                Application.Current.MainPage = new NavigationPage(new Pages.TaskList());
+                Application.Current.MainPage = new NavigationPage(new Pages.MealList());
             }
             catch (Exception ex)
             {
