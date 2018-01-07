@@ -129,9 +129,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
+    <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Models\MobileServiceContext.cs" />
+    <Compile Include="DataObjects\Ingredient.cs" />
+    <Compile Include="DataObjects\Meal.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />

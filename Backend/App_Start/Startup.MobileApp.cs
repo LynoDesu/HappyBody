@@ -33,15 +33,39 @@ namespace Backend
     {
         protected override void Seed(MobileServiceContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+            List<Meal> meals = new List<Meal>
             {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false }
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Breakfast", MealDate = new DateTime(2018, 01, 01) },
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Lunch", MealDate = new DateTime(2018, 01, 01) },
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Dinner", MealDate = new DateTime(2018, 01, 01) },
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            meals[0].Ingredients = new List<Ingredient>()
             {
-                context.Set<TodoItem>().Add(todoItem);
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Egg" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bacon" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bread" },
+            };
+
+            meals[1].Ingredients = new List<Ingredient>()
+            {
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pasta" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pesto" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Chicken" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
+            };
+
+            meals[2].Ingredients = new List<Ingredient>()
+            {
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Potato" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Beans" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Cheese" },
+            };
+
+            foreach (Meal meal in meals)
+            {
+                context.Set<Meal>().Add(meal);
             }
 
             base.Seed(context);
