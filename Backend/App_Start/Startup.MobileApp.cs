@@ -32,10 +32,17 @@ namespace Backend
         }
     }
 
-    public class MobileServiceInitializer : CreateDatabaseIfNotExists<MobileServiceContext>
+    public class MobileServiceInitializer : DropCreateDatabaseAlways<MobileServiceContext>
     {
-        protected override void Seed(MobileServiceContext context)
+        protected override async void Seed(MobileServiceContext context)
         {
+            context.Database.CommandTimeout = 0;
+
+            if (await context.Meals.AnyAsync())
+            {
+                return;
+            }
+
             List<Meal> meals = new List<Meal>
             {
                 new Meal { Id = Guid.NewGuid().ToString(), Description = "Breakfast", MealDate = new DateTime(2018, 01, 01) },
@@ -69,8 +76,9 @@ namespace Backend
             foreach (Meal meal in meals)
             {
                 context.Meals.Add(meal);
-                context.Set<Meal>().Add(meal);
             }
+
+            context.SaveChanges();
 
             base.Seed(context);
         }

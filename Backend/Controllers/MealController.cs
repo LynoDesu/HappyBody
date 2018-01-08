@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -19,7 +20,7 @@ namespace Backend.Controllers
         }
 
         // GET tables/TodoItem
-        public IQueryable<Meal> GetAllMeals() => Query();
+        public IQueryable<Meal> GetAllMeals() => Query().Include(x => x.Ingredients);
 
         // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public SingleResult<Meal> GetMeal(string id) => Lookup(id);
