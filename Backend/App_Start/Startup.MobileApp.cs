@@ -34,7 +34,7 @@ namespace Backend
 
     public class MobileServiceInitializer : DropCreateDatabaseAlways<MobileServiceContext>
     {
-        public new void InitializeDatabase(MobileServiceContext context)
+        public override void InitializeDatabase(MobileServiceContext context)
         {
             if (context.Database.Exists())
             {
