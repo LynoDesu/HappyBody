@@ -38,7 +38,14 @@ namespace Backend
         {
             if (context.Database.Exists())
             {
-                if (!context.Database.CompatibleWithModel(true))
+                try
+                {
+                    if (!context.Database.CompatibleWithModel(true))
+                    {
+                        context.Database.Delete();
+                    }
+                }
+                catch (Exception)
                 {
                     context.Database.Delete();
                 }
