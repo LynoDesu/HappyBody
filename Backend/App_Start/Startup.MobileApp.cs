@@ -34,6 +34,18 @@ namespace Backend
 
     public class MobileServiceInitializer : DropCreateDatabaseAlways<MobileServiceContext>
     {
+        public new void InitializeDatabase(MobileServiceContext context)
+        {
+            if (context.Database.Exists())
+            {
+                if (!context.Database.CompatibleWithModel(true))
+                {
+                    context.Database.Delete();
+                }
+            }
+            context.Database.Create();
+        }
+
         protected override void Seed(MobileServiceContext context)
         {
             List<Meal> meals = new List<Meal>
@@ -68,6 +80,7 @@ namespace Backend
 
             foreach (Meal meal in meals)
             {
+                context.Meals.Add(meal);
                 context.Set<Meal>().Add(meal);
             }
 
