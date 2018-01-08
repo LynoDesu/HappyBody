@@ -1,1 +1,1 @@
-﻿<%@ Application Inherits="HappyBodyBackend.Global" %>
+﻿<%@ Application Inherits="Backend.Global" %>

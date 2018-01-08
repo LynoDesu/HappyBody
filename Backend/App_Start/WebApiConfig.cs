@@ -1,6 +1,6 @@
 ﻿using System.Web.Http;
 
-namespace HappyBodyBackend
+namespace Backend
 {
     public static class WebApiConfig
     {
