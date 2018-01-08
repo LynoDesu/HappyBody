@@ -17,6 +17,9 @@ namespace Backend
         public static void ConfigureMobileApp(IAppBuilder app)
         {
             var config = new HttpConfiguration();
+                
+            config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
+
             var mobileConfig = new MobileAppConfiguration();
 
             mobileConfig
