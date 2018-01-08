@@ -32,66 +32,47 @@ namespace Backend
         }
     }
 
-    public class MobileServiceInitializer : DropCreateDatabaseAlways<MobileServiceContext>
+    public class MobileServiceInitializer : CreateDatabaseIfNotExists<MobileServiceContext>
     {
-        public override void InitializeDatabase(MobileServiceContext context)
+        protected override void Seed(MobileServiceContext context)
         {
-            if (context.Database.Exists())
+            List<Meal> meals = new List<Meal>
             {
-                try
-                {
-                    if (!context.Database.CompatibleWithModel(true))
-                    {
-                        context.Database.Delete();
-                    }
-                }
-                catch (Exception)
-                {
-                    context.Database.Delete();
-                }
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Breakfast", MealDate = new DateTime(2018, 01, 01) },
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Lunch", MealDate = new DateTime(2018, 01, 01) },
+                new Meal { Id = Guid.NewGuid().ToString(), Description = "Dinner", MealDate = new DateTime(2018, 01, 01) },
+            };
+
+            meals[0].Ingredients = new List<Ingredient>()
+            {
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Egg" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bacon" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bread" },
+            };
+
+            meals[1].Ingredients = new List<Ingredient>()
+            {
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pasta" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pesto" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Chicken" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
+            };
+
+            meals[2].Ingredients = new List<Ingredient>()
+            {
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Potato" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Beans" },
+                new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Cheese" },
+            };
+
+            foreach (Meal meal in meals)
+            {
+                context.Meals.Add(meal);
+                context.Set<Meal>().Add(meal);
             }
-            context.Database.Create();
+
+            base.Seed(context);
         }
-
-        //protected override void Seed(MobileServiceContext context)
-        //{
-        //    List<Meal> meals = new List<Meal>
-        //    {
-        //        new Meal { Id = Guid.NewGuid().ToString(), Description = "Breakfast", MealDate = new DateTime(2018, 01, 01) },
-        //        new Meal { Id = Guid.NewGuid().ToString(), Description = "Lunch", MealDate = new DateTime(2018, 01, 01) },
-        //        new Meal { Id = Guid.NewGuid().ToString(), Description = "Dinner", MealDate = new DateTime(2018, 01, 01) },
-        //    };
-
-        //    meals[0].Ingredients = new List<Ingredient>()
-        //    {
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Egg" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bacon" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Bread" },
-        //    };
-
-        //    meals[1].Ingredients = new List<Ingredient>()
-        //    {
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pasta" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Pesto" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Chicken" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Tomato" },
-        //    };
-
-        //    meals[2].Ingredients = new List<Ingredient>()
-        //    {
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Potato" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Beans" },
-        //        new Ingredient() { Id = Guid.NewGuid().ToString(), Description = "Cheese" },
-        //    };
-
-        //    foreach (Meal meal in meals)
-        //    {
-        //        context.Meals.Add(meal);
-        //        context.Set<Meal>().Add(meal);
-        //    }
-
-        //    base.Seed(context);
-        //}
     }
 }
