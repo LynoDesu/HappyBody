@@ -32,7 +32,7 @@ Thumbs.db
 *.dmg
 *.app
 
-*.[Dd]esigner.cs
+*.designer.cs
 
 # resharper
 *_Resharper.*
