@@ -138,6 +138,10 @@
     <Compile Include="Migrations\201801091121230_InitialCreate.Designer.cs">
       <DependentUpon>201801091121230_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201801091425364_FixRelationships.cs" />
+    <Compile Include="Migrations\201801091425364_FixRelationships.Designer.cs">
+      <DependentUpon>201801091425364_FixRelationships.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="App_Start\Startup.MobileApp.cs" />
@@ -152,6 +156,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201801091121230_InitialCreate.resx">
       <DependentUpon>201801091121230_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801091425364_FixRelationships.resx">
+      <DependentUpon>201801091425364_FixRelationships.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

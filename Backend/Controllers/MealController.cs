@@ -20,7 +20,7 @@ namespace Backend.Controllers
         }
 
         // GET tables/TodoItem
-        public IQueryable<Meal> GetAllMeals() => Query().Include(x => x.Ingredients);
+        public IQueryable<Meal> GetAllMeals() => Query();
 
         // GET tables/TodoItem/48D68C86-6EA6-4C25-AA33-223FC9A27959
         public SingleResult<Meal> GetMeal(string id) => Lookup(id);
