@@ -26,6 +26,7 @@ namespace HappyBodyApp.ViewModels
         }
 
         public Meal Item { get; set; }
+        public bool ReviewNow { get; set; }
 
         Command cmdSave;
         public Command SaveCommand => cmdSave ?? (cmdSave = new Command(async () => await ExecuteSaveCommand()));

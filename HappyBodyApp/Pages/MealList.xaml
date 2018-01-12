@@ -21,9 +21,9 @@
                            Padding="10"
                            VerticalOptions="CenterAndExpand">
                 <Label HorizontalOptions="FillAndExpand"
-                       Text="{Binding Text}"
+                       Text="{Binding Description}"
                        TextColor="#272832" />
-                <Switch IsToggled="{Binding Complete, Mode=OneWay}" />
+                <Label Text="{Binding MealDate}" />
               </StackLayout>
             </ViewCell>
           </DataTemplate>

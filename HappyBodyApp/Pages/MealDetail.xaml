@@ -5,10 +5,10 @@
              Title="{Binding Title}">
   <ContentPage.Content>
     <StackLayout Padding="10" Spacing="10">
-      <Label Text="What should I be doing?"/>
-      <Entry Text="{Binding Item.Text}"/>
-      <Label Text="Completed?"/>
-      <Switch IsToggled="{Binding Item.Complete}"/>
+      <Label Text="Enter your meal details"/>
+      <Entry Text="{Binding Item.Description}" Placeholder="Description"/>
+      <Label Text="Review Now?"/>
+      <Switch IsToggled="{Binding ReviewNow}"/>
       <StackLayout VerticalOptions="CenterAndExpand"/>
       <StackLayout Orientation="Vertical" VerticalOptions="End">
         <StackLayout HorizontalOptions="Center" Orientation="Horizontal">

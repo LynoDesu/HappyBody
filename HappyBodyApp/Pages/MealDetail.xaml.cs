@@ -9,6 +9,11 @@ namespace HappyBodyApp.Pages
 {
     public partial class MealDetail : ContentPage
     {
+        public MealDetail()
+        {
+            BindingContext = new MealDetailViewModel();
+        }
+
         public MealDetail(Meal item = null)
         {
             InitializeComponent();
