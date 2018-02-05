@@ -7,6 +7,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using HappyBodyApp.Droid.Services;
+using Xamarin.Forms;
+using HappyBodyApp.Abstractions;
 
 namespace HappyBodyApp.Droid
 {
@@ -21,6 +24,8 @@ namespace HappyBodyApp.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            ((DroidLoginProvider)DependencyService.Get<ILoginProvider>()).Init(this);
 
             LoadApplication(new App());
         }

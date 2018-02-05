@@ -10,6 +10,7 @@ using Microsoft.Azure.Mobile.Server;
 
 namespace Backend.Controllers
 {
+    [Authorize]
     public class MealController : TableController<Meal>
     {
         protected override void Initialize(HttpControllerContext controllerContext)
