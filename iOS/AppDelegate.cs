@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using HappyBodyApp.Abstractions;
 using UIKit;
+using Xamarin.Forms;
 
 namespace HappyBodyApp.iOS
 {

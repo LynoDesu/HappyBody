@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Threading.Tasks;
 using HappyBodyApp.Abstractions;
+using HappyBodyApp.Helpers;
+using HappyBodyApp.Services;
 using Xamarin.Forms;
 
 namespace HappyBodyApp.ViewModels
@@ -24,7 +26,13 @@ namespace HappyBodyApp.ViewModels
 
             try
             {
-                Application.Current.MainPage = new NavigationPage(new Pages.MealList());
+                var cloudService = new AzureCloudService();
+                var user = await cloudService.LoginAsync();
+
+                if (user != null)
+                {
+                    Application.Current.MainPage = new NavigationPage(new Pages.MealList());
+                }
             }
             catch (Exception ex)
             {
