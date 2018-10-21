@@ -18,7 +18,7 @@ namespace HappyBodyApp.Droid.Services
 
         public async Task<MobileServiceUser> LoginAsync(MobileServiceClient client)
         {
-            return await client.LoginAsync(context, "google", "happybody");
+            return await client.LoginAsync(context, MobileServiceAuthenticationProvider.Google, "happybody");
         }
     }
 }

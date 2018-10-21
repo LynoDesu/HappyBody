@@ -12,7 +12,7 @@ namespace HappyBodyApp.Services
 
         public AzureCloudService()
         {
-            client = new MobileServiceClient("https://happybodyapp.azurewebsites.net");
+            client = new MobileServiceClient("https://happybody.azurewebsites.net");
         }
 
         public ICloudTable<T> GetTable<T>() where T : TableData
