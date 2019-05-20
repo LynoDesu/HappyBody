@@ -16,12 +16,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Localisation\" />
+    <Folder Include="Views\Meal\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Localisation\MealStrings.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MealStrings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Meal\MealEntryPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Localisation\MealStrings.Designer.cs">

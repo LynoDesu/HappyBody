@@ -4,27 +4,46 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HappyBody.Core.Models;
 using HappyBody.Localisation;
-using HappyBody.ViewModels;
 using Xamarin.Forms;
 
-namespace HappyBodyApp.ViewModels
+namespace HappyBody.ViewModels
 {
     public class MealEntryPageViewModel : BaseViewModel
     {
-        public Meal Meal { get; set; }
-        public bool ReviewNow { get; set; }
+        Meal _meal;
+        public Meal Meal 
+        {
+            get => _meal;
+            set => SetProperty(ref _meal, value);
+        }
 
-        public ICommand SaveMealCommand;
-        public ICommand DeleteMealCommand;
+        bool _reviewNow;
+        public bool ReviewNow 
+        {
+            get => _reviewNow;
+            set => SetProperty(ref _reviewNow, value);
+        }
+
+        public ICommand SaveMealCommand { get; set; }
 
         public MealEntryPageViewModel()
         {
+            Meal = new Meal { Description = MealStrings.DefaultMealText };
+            Initialise();
+        }
+
+        public MealEntryPageViewModel(Meal meal = null)
+        {
+            Meal = meal;
+
+            Initialise();
+        }
+
+        void Initialise()
+        {
             Title = MealStrings.MealEntryTitle;
 
-            Meal = new Meal { Description = MealStrings.DefaultMealText };
-
             SaveMealCommand = new Command(async () => await ExecuteSaveCommand());
-            DeleteMealCommand = new Command(async () => await ExecuteDeleteCommand());
         }
 
         async Task ExecuteSaveCommand()
@@ -44,28 +63,9 @@ namespace HappyBodyApp.ViewModels
             finally
             {
                 IsBusy = false;
-            }
-        }
-
-        async Task ExecuteDeleteCommand()
-        {
-            if (IsBusy)
-                return;
-            IsBusy = true;
-
-            try
-            {
-                //TODO: 
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine($"[{nameof(MealEntryPageViewModel)}] Delete error: {ex.Message}");
-            }
-            finally
-            {
-                IsBusy = false;
+                await Application.Current.MainPage.Navigation.PopModalAsync();
             }
         }
     }
 }
-}
+
