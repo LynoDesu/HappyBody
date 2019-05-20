@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyBody", "HappyBody\Happ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyBody.Functions", "HappyBody.Functions\HappyBody.Functions.csproj", "{9FFE98E0-F30A-4B94-8AFF-CB1B24BC6785}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyBody.Core", "HappyBody.Core\HappyBody.Core.csproj", "{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,5 +69,17 @@ Global
 		{9FFE98E0-F30A-4B94-8AFF-CB1B24BC6785}.Debug|iPhone.Build.0 = Debug|Any CPU
 		{9FFE98E0-F30A-4B94-8AFF-CB1B24BC6785}.Release|iPhone.ActiveCfg = Release|Any CPU
 		{9FFE98E0-F30A-4B94-8AFF-CB1B24BC6785}.Release|iPhone.Build.0 = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{AF1EC56F-EC0C-413C-A16A-8D5F979B4FDD}.Release|iPhone.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
