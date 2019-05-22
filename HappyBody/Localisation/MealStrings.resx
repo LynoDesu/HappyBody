@@ -18,4 +18,10 @@
     <data name="DefaultMealText" xml:space="preserve">
         <value>New Meal</value>
     </data>
+    <data name="IngredientAlreadyExists" xml:space="preserve">
+        <value>This ingredient has already been added to the meal.</value>
+    </data>
+    <data name="Ok" xml:space="preserve">
+        <value>Ok.</value>
+    </data>
 </root>

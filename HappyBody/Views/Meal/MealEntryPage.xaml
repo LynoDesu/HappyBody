@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HappyBody.Views.Meal.MealEntryPage"
-             xmlns:vm="clr-namespace:HappyBody.ViewModels" 
+             xmlns:vm="clr-namespace:HappyBody.ViewModels"
+             xmlns:models="clr-namespace:HappyBody.Core.Models"
              Title="{Binding Title}"
              Visual="Material">
     <ContentPage.BindingContext>
@@ -15,14 +16,18 @@
         <StackLayout Padding="10" Spacing="10">
             <Label Text="Enter your meal details"/>
             <Entry Text="{Binding Meal.Description}" Placeholder="Description"/>
-            <Label Text="Review Now?"/>
-            <Switch IsToggled="{Binding ReviewNow}"/>
             <Label Text="Ingredients" FontSize="Large"/>
             <StackLayout Orientation="Horizontal">
-                <Entry HorizontalOptions="FillAndExpand" Placeholder="Add Ingredient" />
-                <Button HorizontalOptions="End" Text="Add" />
+                <Entry x:Name="InputIngredient" HorizontalOptions="FillAndExpand" Placeholder="Add Ingredient" />
+                <Button HorizontalOptions="End" Text="Add" Command="{Binding AddIngredientCommand}" CommandParameter="{Binding Source={x:Reference InputIngredient}, Path=Text}" />
             </StackLayout>
-            <ListView ItemsSource="{Binding Meal.Ingredients}"/>
+            <ListView ItemsSource="{Binding Ingredients}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding Description}" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <Button BackgroundColor="#A6E55E"
                   Command="{Binding SaveMealCommand}"
                   Text="Save" TextColor="White"
