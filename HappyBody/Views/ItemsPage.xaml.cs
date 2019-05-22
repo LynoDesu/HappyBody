@@ -10,6 +10,7 @@ using Xamarin.Forms.Xaml;
 using HappyBody.Models;
 using HappyBody.Views;
 using HappyBody.ViewModels;
+using HappyBody.Views.Meal;
 
 namespace HappyBody.Views
 {
@@ -38,7 +39,7 @@ namespace HappyBody.Views
 
         async void AddItem_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new NavigationPage(new NewItemPage()));
+            await Navigation.PushModalAsync(new NavigationPage(new MealEntryPage()));
         }
 
         protected override void OnAppearing()
