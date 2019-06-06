@@ -15,5 +15,8 @@ namespace HappyBody.Core.Models
         public string Description { get; set; }
         public string ImgFilename { get; set; }
         public List<Ingredient> Ingredients { get; set; }
+
+        public string IngredientsText => $"{Ingredients.Count} Ingredients";
+        public string TitleText => $"{Description} - {MealDate.ToString("D")}";
     }
 }

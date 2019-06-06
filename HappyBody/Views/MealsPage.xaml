@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:HappyBody;assembly=HappyBody"
+             xmlns:models="clr-namespace:HappyBody.Core.Models;assembly=HappyBody.Core"
+             x:Class="HappyBody.Views.MealsPage" 
+             Title="{Binding Title}" 
+             x:Name="MealsListPage"
+             Visual="Material"
+             BackgroundColor="#42D9C8">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ImageButton">
+                <Style.Triggers>
+                    <EventTrigger Event="Clicked">
+                        <local:ScaleUpAndDownAction />
+                    </EventTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+<!--         <Frame Padding="5" CornerRadius="10" Margin="5">
+            <StackLayout Padding="10">
+                <Label Text="Lunch" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
+                <StackLayout Orientation="Horizontal">
+                    <Image Aspect="AspectFit" Source="{local:ImageResource HappyBody.Resources.breakfast.png}" WidthRequest="50" HeightRequest="50" />
+                    <Label Text="3 Ingredients" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                </StackLayout>
+            </StackLayout>
+        </Frame>-->
+        <CollectionView x:Name="ItemsListView" Margin="5" Visual="Material" ItemsSource="{Binding Meals}" SelectionMode="Single" SelectionChanged="OnItemSelected">
+            <CollectionView.ItemTemplate x:DataType="models:Meal">
+                <DataTemplate>
+                    <ContentView>
+                        <Frame Padding="5" CornerRadius="10" Margin="5">
+                            <StackLayout Padding="10">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label HorizontalOptions="StartAndExpand" Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Medium" />
+                                    <Label HorizontalOptions="End" Text="{Binding MealDate, StringFormat='{0:D}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Small" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Aspect="AspectFit" WidthRequest="50" HeightRequest="50" Source="{local:ImageResource HappyBody.Resources.breakfast.png}" />
+                                    <Label HorizontalOptions="StartAndExpand" Text="{Binding IngredientsText}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                                    <ImageButton WidthRequest="32" HorizontalOptions="End" Source="{local:ImageResource HappyBody.Resources.happy.png}" BackgroundColor="Transparent"/>
+                                    <ImageButton WidthRequest="32" HorizontalOptions="End" Source="{local:ImageResource HappyBody.Resources.neutral.png}" BackgroundColor="Transparent"/>
+                                    <ImageButton WidthRequest="32" HorizontalOptions="End" Source="{local:ImageResource HappyBody.Resources.sad.png}" BackgroundColor="Transparent"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+                    </ContentView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

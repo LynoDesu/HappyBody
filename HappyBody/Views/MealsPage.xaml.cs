@@ -7,31 +7,30 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-using HappyBody.Models;
+using HappyBody.Core.Models;
 using HappyBody.Views;
 using HappyBody.ViewModels;
 using HappyBody.Views.Meal;
 
 namespace HappyBody.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class MealsPage : ContentPage
     {
-        ItemsViewModel viewModel;
+        MealsViewModel viewModel;
 
-        public ItemsPage()
+        public MealsPage()
         {
             InitializeComponent();
 
-            BindingContext = viewModel = new ItemsViewModel();
+            BindingContext = viewModel = new MealsViewModel();
         }
 
-        async void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        async void OnItemSelected(object sender, SelectionChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
-            if (item == null)
+            if (!(args.CurrentSelection.SingleOrDefault() is HappyBody.Core.Models.Meal meal))
                 return;
 
-            await Navigation.PushAsync(new ItemDetailPage(new ItemDetailViewModel(item)));
+            await Navigation.PushAsync(new MealEntryPage(new MealEntryPageViewModel(meal)));
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;
@@ -46,8 +45,8 @@ namespace HappyBody.Views
         {
             base.OnAppearing();
 
-            if (viewModel.Items.Count == 0)
-                viewModel.LoadItemsCommand.Execute(null);
+            if (viewModel.Meals.Count == 0)
+                viewModel.LoadMealsCommand.Execute(null);
         }
     }
 }

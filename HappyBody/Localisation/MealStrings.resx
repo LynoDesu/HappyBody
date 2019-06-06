@@ -24,4 +24,7 @@
     <data name="Ok" xml:space="preserve">
         <value>Ok.</value>
     </data>
+    <data name="MealsPageTitle" xml:space="preserve">
+        <value>Recent Meals</value>
+    </data>
 </root>

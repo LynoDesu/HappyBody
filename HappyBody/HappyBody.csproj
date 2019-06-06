@@ -17,6 +17,14 @@
   <ItemGroup>
     <Folder Include="Localisation\" />
     <Folder Include="Views\Meal\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\breakfast.png" />
+    <EmbeddedResource Include="Resources\sad.png" />
+    <EmbeddedResource Include="Resources\neutral.png" />
+    <EmbeddedResource Include="Resources\happy.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Localisation\MealStrings.resx">
@@ -34,5 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\HappyBody.Core\HappyBody.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\breakfast.png" />
+    <None Remove="Resources\sad.png" />
+    <None Remove="Resources\neutral.png" />
+    <None Remove="Resources\happy.png" />
   </ItemGroup>
 </Project>
