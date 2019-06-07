@@ -6,7 +6,6 @@
              x:Class="HappyBody.Views.MealsPage" 
              Title="{Binding Title}" 
              x:Name="MealsListPage"
-             Visual="Material"
              BackgroundColor="#42D9C8">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Clicked="AddItem_Clicked" />
@@ -23,7 +22,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-<!--         <Frame Padding="5" CornerRadius="10" Margin="5">
+<!--    <Frame Padding="5" CornerRadius="10" Margin="5">
             <StackLayout Padding="10">
                 <Label Text="Lunch" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="16" />
                 <StackLayout Orientation="Horizontal">
@@ -32,11 +31,11 @@
                 </StackLayout>
             </StackLayout>
         </Frame>-->
-        <CollectionView x:Name="ItemsListView" Margin="5" Visual="Material" ItemsSource="{Binding Meals}" SelectionMode="Single" SelectionChanged="OnItemSelected">
-            <CollectionView.ItemTemplate x:DataType="models:Meal">
+        <CollectionView x:Name="ItemsListView" Margin="5" ItemsSource="{Binding Meals}" SelectionMode="Single" SelectionChanged="OnItemSelected">
+            <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <ContentView>
-                        <Frame Padding="5" CornerRadius="10" Margin="5">
+                        <Frame Padding="2" CornerRadius="10" Margin="5">
                             <StackLayout Padding="10">
                                 <StackLayout Orientation="Horizontal">
                                     <Label HorizontalOptions="StartAndExpand" Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Medium" />
