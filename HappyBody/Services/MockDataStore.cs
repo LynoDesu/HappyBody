@@ -2,65 +2,83 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HappyBody.Core.Models;
 using HappyBody.Models;
 
 namespace HappyBody.Services
 {
-    public class MockDataStore : IDataStore<Item>
+    public class MockDataStore : IDataStore<Meal>
     {
-        List<Item> items;
+        List<Meal> meals;
 
         public MockDataStore()
         {
-            items = new List<Item>();
-            var mockItems = new List<Item>
+            meals = new List<Meal>();
+            var mockItems = new List<Meal>
             {
-                new Item { Id = Guid.NewGuid().ToString(), Text = "First item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Second item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Third item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fourth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Fifth item", Description="This is an item description." },
-                new Item { Id = Guid.NewGuid().ToString(), Text = "Sixth item", Description="This is an item description." }
+                new Meal { Description = "Lunch", MealDate = new DateTime(2019, 05, 20), 
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { Description = "Carrots" },
+                        new Ingredient { Description = "Broccoli" },
+                        new Ingredient { Description = "Gravy" },
+                        new Ingredient { Description = "Beef" },
+                    } 
+                },
+                new Meal { Description = "Dinner", MealDate = new DateTime(2019, 05, 21),
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { Description = "Ham" },
+                        new Ingredient { Description = "Bread" },
+                        new Ingredient { Description = "Butter" },
+                        new Ingredient { Description = "Cheese" },
+                    }
+                },
+                new Meal { Description = "Breakfast", MealDate = new DateTime(2019, 05, 21),
+                    Ingredients = new List<Ingredient>
+                    {
+                        new Ingredient { Description = "Eggs" },
+                        new Ingredient { Description = "Bacon" },
+                        new Ingredient { Description = "Butter" }
+                    }
+                },
             };
 
-            foreach (var item in mockItems)
-            {
-                items.Add(item);
-            }
+            meals.AddRange(mockItems);
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddItemAsync(Meal meal)
         {
-            items.Add(item);
+            meals.Add(meal);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateItemAsync(Meal meal)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == item.Id).FirstOrDefault();
-            items.Remove(oldItem);
-            items.Add(item);
+            var oldItem = meals.SingleOrDefault(x => x.Id == meal.Id);
+            meals.Remove(oldItem);
+            meals.Add(meal);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeleteItemAsync(Guid id)
         {
-            var oldItem = items.Where((Item arg) => arg.Id == id).FirstOrDefault();
-            items.Remove(oldItem);
+            var oldItem = meals.SingleOrDefault(x => x.Id == id);
+            meals.Remove(oldItem);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Meal> GetItemAsync(Guid id)
         {
-            return await Task.FromResult(items.FirstOrDefault(s => s.Id == id));
+            return await Task.FromResult(meals.SingleOrDefault(x => x.Id == id));
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Meal>> GetItemsAsync(bool forceRefresh = false)
         {
-            return await Task.FromResult(items);
+            return await Task.FromResult(meals.OrderByDescending(x => x.MealDate));
         }
     }
 }

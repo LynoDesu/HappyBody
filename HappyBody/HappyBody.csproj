@@ -11,7 +11,42 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Xamarin.Forms" Version="3.6.0.344457" />  
+    <PackageReference Include="Xamarin.Forms" Version="4.0.0.482894" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Localisation\" />
+    <Folder Include="Views\Meal\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Extensions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\breakfast.png" />
+    <EmbeddedResource Include="Resources\sad.png" />
+    <EmbeddedResource Include="Resources\neutral.png" />
+    <EmbeddedResource Include="Resources\happy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Localisation\MealStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MealStrings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Views\Meal\MealEntryPage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Localisation\MealStrings.Designer.cs">
+      <DependentUpon>MealStrings.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyBody.Core\HappyBody.Core.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\breakfast.png" />
+    <None Remove="Resources\sad.png" />
+    <None Remove="Resources\neutral.png" />
+    <None Remove="Resources\happy.png" />
   </ItemGroup>
 </Project>
