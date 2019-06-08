@@ -84,7 +84,7 @@ namespace HappyBody.ViewModels
             finally
             {
                 IsBusy = false;
-                await Application.Current.MainPage.Navigation.PopModalAsync();
+                await Shell.Current.Navigation.PopModalAsync();
             }
         }
 
