@@ -43,6 +43,8 @@ namespace HappyBody.ViewModels
 
         public ICommand SaveMealCommand { get; set; }
         public ICommand AddIngredientCommand { get; set; }
+        public ICommand DeleteMealCommand { get; set; }
+        public ICommand DeleteIngredientCommand { get; set; }
 
         public MealEntryPageViewModel()
         {
@@ -72,6 +74,8 @@ namespace HappyBody.ViewModels
 
             SaveMealCommand = new Command(async () => await ExecuteSaveCommand());
             AddIngredientCommand = new Command<string>((ingredient) => ExecuteAddIngredient(ingredient));
+            DeleteMealCommand = new Command(async () => await ExecuteDeleteCommand());
+            DeleteIngredientCommand = new Command<Ingredient>(ExecuteDeleteIngredientCommand);
         }
 
         async Task ExecuteSaveCommand()
@@ -91,6 +95,48 @@ namespace HappyBody.ViewModels
             {
                 Debug.WriteLine($"[{nameof(MealEntryPageViewModel)}] Save error: {ex.Message}");
                 MessagingCenter.Send(this, MealSaveErrorMessage);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        async Task ExecuteDeleteCommand()
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                await _dataStore.DeleteItemAsync(Meal.Id);
+                MessagingCenter.Send(this, MealSavedMessage);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[{nameof(MealEntryPageViewModel)}] Delete error: {ex.Message}");
+                MessagingCenter.Send(this, MealSaveErrorMessage);
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+        }
+
+        void ExecuteDeleteIngredientCommand(Ingredient ingredient)
+        {
+            if (IsBusy)
+                return;
+            IsBusy = true;
+
+            try
+            {
+                Ingredients.Remove(ingredient);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[{nameof(MealEntryPageViewModel)}] Delete error: {ex.Message}");
             }
             finally
             {

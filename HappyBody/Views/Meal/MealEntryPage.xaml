@@ -5,7 +5,8 @@
              xmlns:vm="clr-namespace:HappyBody.ViewModels"
              xmlns:models="clr-namespace:HappyBody.Core.Models"
              Title="{Binding Title}"
-             Visual="Material">
+             Visual="Material"
+             x:Name="MealEntry">
     <ContentPage.BindingContext>
         <vm:MealEntryPageViewModel/>
     </ContentPage.BindingContext>
@@ -24,14 +25,28 @@
             <ListView ItemsSource="{Binding Ingredients}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Description}" />
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            </ViewCell.ContextActions>
+                            <StackLayout Orientation="Horizontal">
+                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding Description}" />
+                                <Button HorizontalOptions="End" Text="Delete" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button BackgroundColor="#A6E55E"
+            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                <Button BackgroundColor="Red"
+                      Command="{Binding DeleteMealCommand}"
+                      Text="Delete" TextColor="White"
+                      HorizontalOptions="End"/> 
+                <Button BackgroundColor="#A6E55E"
                   Command="{Binding SaveMealCommand}"
                   Text="Save" TextColor="White"
                   HorizontalOptions="End"/>
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
