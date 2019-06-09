@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using HappyBody.Core.Models;
 using HappyBody.Localisation;
+using HappyBody.Services;
 using Xamarin.Forms;
 
 namespace HappyBody.ViewModels
@@ -14,6 +15,10 @@ namespace HappyBody.ViewModels
     {
         public const string IngredientAddedMessage = "IngredientAdded";
         public const string IngredientAlreadyExistsMessage = "IngredientAlreadyExists";
+        public const string MealSaveErrorMessage = "MealSaveError";
+        public const string MealSavedMessage = "MealSaved";
+
+        private IDataStore<Meal> _dataStore;
 
         Meal _meal;
         public Meal Meal 
@@ -61,6 +66,8 @@ namespace HappyBody.ViewModels
 
         void Initialise()
         {
+            _dataStore = DependencyService.Resolve<IDataStore<Meal>>();
+
             Title = MealStrings.MealEntryTitle;
 
             SaveMealCommand = new Command(async () => await ExecuteSaveCommand());
@@ -75,16 +82,19 @@ namespace HappyBody.ViewModels
 
             try
             {
-                //TODO: Save Meal
+                Meal.Ingredients.Clear();
+                Meal.Ingredients.AddRange(Ingredients);
+                await _dataStore.SaveItemAsync(Meal);
+                MessagingCenter.Send(this, MealSavedMessage);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine($"[{nameof(MealEntryPageViewModel)}] Save error: {ex.Message}");
+                MessagingCenter.Send(this, MealSaveErrorMessage);
             }
             finally
             {
                 IsBusy = false;
-                await Shell.Current.Navigation.PopModalAsync();
             }
         }
 
@@ -95,7 +105,7 @@ namespace HappyBody.ViewModels
                 var ingredient = text.Trim();
                 if (!Ingredients.Any(x => x.Description.Equals(ingredient, StringComparison.InvariantCultureIgnoreCase)))
                 {
-                    Ingredients.Add(new Ingredient { Description = ingredient });
+                    Ingredients.Add(new Ingredient { Description = ingredient, MealId = Meal.Id });
                     MessagingCenter.Send(this, IngredientAddedMessage);
                 }
                 else
