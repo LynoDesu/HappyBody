@@ -13,7 +13,7 @@ namespace HappyBody
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            DependencyService.Register<LiteDbDataStore>();
             MainPage = new AppShell();
         }
 
