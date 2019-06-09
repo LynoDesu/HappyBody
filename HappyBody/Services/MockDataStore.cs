@@ -54,10 +54,14 @@ namespace HappyBody.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Meal meal)
+        public async Task<bool> SaveItemAsync(Meal meal)
         {
             var oldItem = meals.SingleOrDefault(x => x.Id == meal.Id);
-            meals.Remove(oldItem);
+            if (oldItem != null)
+            {
+                meals.Remove(oldItem);
+            }
+
             meals.Add(meal);
 
             return await Task.FromResult(true);

@@ -22,9 +22,15 @@
         <value>This ingredient has already been added to the meal.</value>
     </data>
     <data name="Ok" xml:space="preserve">
-        <value>Ok.</value>
+        <value>Ok</value>
     </data>
     <data name="MealsPageTitle" xml:space="preserve">
         <value>Recent Meals</value>
+    </data>
+    <data name="Error" xml:space="preserve">
+        <value>Error</value>
+    </data>
+    <data name="ProblemSavingMeal" xml:space="preserve">
+        <value>There was a problem trying to save the meal. Please try again.</value>
     </data>
 </root>
