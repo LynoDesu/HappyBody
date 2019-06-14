@@ -13,12 +13,9 @@ namespace HappyBody.Services
 
         public LiteDbDataStore()
         {
-            var mapper = BsonMapper.Global;
-
-            mapper.Entity<Meal>().Id(x => x.Id);
-
             var db = new LiteDatabase(DependencyService.Get<IDatabaseAccess>().DatabasePath());
             _collection = db.GetCollection<Meal>();
+            _collection.EnsureIndex(i => i.Id, true);
         }
 
         public Task<bool> AddItemAsync(Meal item)
@@ -43,7 +40,7 @@ namespace HappyBody.Services
 
             try
             {
-                _collection.Delete(i => i.Id == id);
+                success = _collection.Delete(id);
             }
             catch (Exception ex)
             {
