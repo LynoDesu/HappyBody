@@ -25,7 +25,8 @@ namespace HappyBody.Views.Meal
             base.OnAppearing();
 
             MessagingCenter.Subscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.IngredientAddedMessage, IngredientAdded);
-            MessagingCenter.Subscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.MealSavedMessage, async (x) => await DismissPage());
+            MessagingCenter.Subscribe<MealEntryPageViewModel, Core.Models.Meal>(this, MealEntryPageViewModel.MealSavedMessage, async (x, m) => await DismissPage());
+            MessagingCenter.Subscribe<MealEntryPageViewModel, Core.Models.Meal>(this, MealEntryPageViewModel.MealDeletedMessage, async (x, m) => await DismissPage());
             MessagingCenter.Subscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.IngredientAlreadyExistsMessage, async (x) => await ShowIngredientExistsDialog());
             MessagingCenter.Subscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.MealSaveErrorMessage, async (x) => await ShowErrorSavingMealDialog());
         }
@@ -37,7 +38,8 @@ namespace HappyBody.Views.Meal
             MessagingCenter.Unsubscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.IngredientAddedMessage);
             MessagingCenter.Unsubscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.IngredientAlreadyExistsMessage);
             MessagingCenter.Unsubscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.MealSaveErrorMessage);
-            MessagingCenter.Unsubscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.MealSavedMessage);
+            MessagingCenter.Unsubscribe<MealEntryPageViewModel, Core.Models.Meal>(this, MealEntryPageViewModel.MealSavedMessage);
+            MessagingCenter.Unsubscribe<MealEntryPageViewModel, Core.Models.Meal>(this, MealEntryPageViewModel.MealDeletedMessage);
         }
 
         async void Cancel_Clicked(object sender, EventArgs e)

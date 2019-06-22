@@ -10,6 +10,8 @@ using HappyBody.Views;
 using HappyBody.Core.Models;
 using HappyBody.Services;
 using HappyBody.Localisation;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace HappyBody.ViewModels
 {
@@ -25,6 +27,25 @@ namespace HappyBody.ViewModels
             Title = MealStrings.MealsPageTitle;
             Meals = new ObservableCollection<Meal>();
             LoadMealsCommand = new Command(async () => await ExecuteLoadMealsCommand());
+
+            MessagingCenter.Subscribe<MealEntryPageViewModel, Meal>(this, MealEntryPageViewModel.MealDeletedMessage, (vm, meal) =>
+            {
+                Meals.Remove(meal);
+            });
+
+            MessagingCenter.Subscribe<MealEntryPageViewModel, Meal>(this, MealEntryPageViewModel.MealSavedMessage, (vm, meal) =>
+            {
+                int index = 0;
+
+                var exisingMeal = Meals.SingleOrDefault(x => x.Id == meal.Id);
+                if (exisingMeal != null)
+                {
+                    index = Meals.IndexOf(exisingMeal);
+                    Meals.Remove(exisingMeal);
+                }
+
+                Meals.Insert(index, meal);
+            });
         }
 
         async Task ExecuteLoadMealsCommand()
@@ -36,7 +57,11 @@ namespace HappyBody.ViewModels
 
             try
             {
-                Meals.Clear();
+                if (Device.RuntimePlatform != Device.iOS)
+                {
+                    Meals.Clear();
+                }
+
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {

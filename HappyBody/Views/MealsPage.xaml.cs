@@ -23,15 +23,13 @@ namespace HappyBody.Views
             InitializeComponent();
 
             BindingContext = viewModel = new MealsViewModel();
-
-            MessagingCenter.Subscribe<MealEntryPageViewModel>(this, MealEntryPageViewModel.MealSavedMessage, (x) => RefreshMeals());
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
-            RefreshMeals();
+            LoadMeals();
         }
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs args)
@@ -50,9 +48,10 @@ namespace HappyBody.Views
             await Navigation.PushModalAsync(new NavigationPage(new MealEntryPage()));
         }
 
-        void RefreshMeals()
+        void LoadMeals()
         {
-            viewModel.LoadMealsCommand.Execute(null);
+            if (viewModel.Meals.Count == 0)
+                viewModel.LoadMealsCommand.Execute(null);
         }
     }
 }

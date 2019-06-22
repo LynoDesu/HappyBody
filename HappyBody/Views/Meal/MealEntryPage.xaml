@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="HappyBody.Views.Meal.MealEntryPage"
@@ -14,39 +14,41 @@
         <ToolbarItem Text="Cancel" Clicked="Cancel_Clicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout Padding="10" Spacing="10">
-            <Label Text="Enter your meal details"/>
-            <Entry Text="{Binding Meal.Description}" Placeholder="Description"/>
-            <Label Text="Ingredients" FontSize="Large"/>
-            <StackLayout Orientation="Horizontal">
-                <Entry x:Name="InputIngredient" HorizontalOptions="FillAndExpand" Placeholder="Add Ingredient" />
-                <Button HorizontalOptions="End" Text="Add" Command="{Binding AddIngredientCommand}" CommandParameter="{Binding Source={x:Reference InputIngredient}, Path=Text}" />
+        <ScrollView>
+            <StackLayout Padding="10" Spacing="10">
+                <Label Text="Enter your meal details"/>
+                <Entry Text="{Binding Meal.Description}" Placeholder="Description"/>
+                <Label Text="Ingredients" FontSize="Large"/>
+                <StackLayout Orientation="Horizontal">
+                    <Entry x:Name="InputIngredient" HorizontalOptions="FillAndExpand" Placeholder="Add Ingredient" />
+                    <Button HorizontalOptions="End" Text="Add" Command="{Binding AddIngredientCommand}" CommandParameter="{Binding Source={x:Reference InputIngredient}, Path=Text}" />
+                </StackLayout>
+                <ListView ItemsSource="{Binding Ingredients}" HeightRequest="100">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                                </ViewCell.ContextActions>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding Description}" />
+                                    <Button HorizontalOptions="End" Text="Delete" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="End">
+                    <Button BackgroundColor="Red"
+                          Command="{Binding DeleteMealCommand}"
+                          Text="Delete" TextColor="White"
+                          HorizontalOptions="End"/> 
+                    <Button BackgroundColor="#A6E55E"
+                      Command="{Binding SaveMealCommand}"
+                      Text="Save" TextColor="White"
+                      HorizontalOptions="End"/>
+                </StackLayout>
             </StackLayout>
-            <ListView ItemsSource="{Binding Ingredients}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Delete" IsDestructive="True" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
-                            </ViewCell.ContextActions>
-                            <StackLayout Orientation="Horizontal">
-                                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" Text="{Binding Description}" />
-                                <Button HorizontalOptions="End" Text="Delete" Command="{Binding Source={x:Reference MealEntry}, Path=BindingContext.DeleteIngredientCommand}" CommandParameter="{Binding .}" />
-                            </StackLayout>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="End">
-                <Button BackgroundColor="Red"
-                      Command="{Binding DeleteMealCommand}"
-                      Text="Delete" TextColor="White"
-                      HorizontalOptions="End"/> 
-                <Button BackgroundColor="#A6E55E"
-                  Command="{Binding SaveMealCommand}"
-                  Text="Save" TextColor="White"
-                  HorizontalOptions="End"/>
-            </StackLayout>
-        </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

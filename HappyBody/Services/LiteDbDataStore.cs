@@ -20,11 +20,11 @@ namespace HappyBody.Services
 
         public Task<bool> AddItemAsync(Meal item)
         {
-            var success = true;
-
+            bool success;
             try
             {
-                _collection.Insert(item);
+                var meal = _collection.Insert(item);
+                success = meal != null;
             }
             catch (Exception ex)
             {
@@ -36,8 +36,7 @@ namespace HappyBody.Services
 
         public Task<bool> DeleteItemAsync(Guid id)
         {
-            var success = true;
-
+            bool success;
             try
             {
                 success = _collection.Delete(id);
