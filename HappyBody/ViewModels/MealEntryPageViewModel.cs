@@ -17,6 +17,7 @@ namespace HappyBody.ViewModels
         public const string IngredientAlreadyExistsMessage = "IngredientAlreadyExists";
         public const string MealSaveErrorMessage = "MealSaveError";
         public const string MealSavedMessage = "MealSaved";
+        public const string MealDeletedMessage = "MealDeleted";
 
         private IDataStore<Meal> _dataStore;
 
@@ -89,7 +90,7 @@ namespace HappyBody.ViewModels
                 Meal.Ingredients.Clear();
                 Meal.Ingredients.AddRange(Ingredients);
                 await _dataStore.SaveItemAsync(Meal);
-                MessagingCenter.Send(this, MealSavedMessage);
+                MessagingCenter.Send(this, MealSavedMessage, Meal);
             }
             catch (Exception ex)
             {
@@ -111,7 +112,7 @@ namespace HappyBody.ViewModels
             try
             {
                 await _dataStore.DeleteItemAsync(Meal.Id);
-                MessagingCenter.Send(this, MealSavedMessage);
+                MessagingCenter.Send(this, MealDeletedMessage, Meal);
             }
             catch (Exception ex)
             {
