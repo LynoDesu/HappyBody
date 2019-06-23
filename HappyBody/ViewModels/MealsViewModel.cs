@@ -57,11 +57,6 @@ namespace HappyBody.ViewModels
 
             try
             {
-                if (Device.RuntimePlatform != Device.iOS)
-                {
-                    Meals.Clear();
-                }
-
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
