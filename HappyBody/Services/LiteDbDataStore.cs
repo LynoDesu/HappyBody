@@ -67,6 +67,7 @@ namespace HappyBody.Services
 
             try
             {
+                item.LastUpdated = DateTime.UtcNow;
                 _collection.Upsert(item);
             }
             catch (Exception ex)

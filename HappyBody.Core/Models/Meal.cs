@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using HappyBody.Core.Enums;
 
 namespace HappyBody.Core.Models
 {
@@ -12,13 +13,12 @@ namespace HappyBody.Core.Models
             Ingredients = new List<Ingredient>();
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get; set; }
         public DateTime MealDate { get; set; }
         public string Description { get; set; }
         public string ImgFilename { get; set; }
         public List<Ingredient> Ingredients { get; set; }
-
-        public string IngredientsText => $"{Ingredients.Count} Ingredients";
-        public string TitleText => $"{Description} - {MealDate.ToString("D")}";
+        public DateTime LastUpdated { get; set; }
+        public MealReactions Reaction { get; set; }
     }
 }

@@ -12,6 +12,8 @@ using HappyBody.Services;
 using HappyBody.Localisation;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Input;
+using HappyBody.Core.Enums;
 
 namespace HappyBody.ViewModels
 {
@@ -19,18 +21,25 @@ namespace HappyBody.ViewModels
     {
         public IDataStore<Meal> DataStore => DependencyService.Get<IDataStore<Meal>>() ?? new MockDataStore();
 
-        public ObservableCollection<Meal> Meals { get; set; }
-        public Command LoadMealsCommand { get; set; }
+        public ObservableCollection<MealViewModel> Meals { get; set; }
+
+        public ICommand LoadMealsCommand { get; }
+        public ICommand GoodReactionCommand { get; }
+        public ICommand BadReactionCommand { get; }
+        public ICommand NeutralReactionCommand { get; }
 
         public MealsViewModel()
         {
             Title = MealStrings.MealsPageTitle;
-            Meals = new ObservableCollection<Meal>();
+            Meals = new ObservableCollection<MealViewModel>();
             LoadMealsCommand = new Command(async () => await ExecuteLoadMealsCommand());
+            GoodReactionCommand = new Command<MealViewModel>(async (meal) => await ExecuteReactionCommand(meal, MealReactions.Positive));
+            BadReactionCommand = new Command<MealViewModel>(async (meal) => await ExecuteReactionCommand(meal, MealReactions.Negative));
+            NeutralReactionCommand = new Command<MealViewModel>(async (meal) => await ExecuteReactionCommand(meal, MealReactions.Neutral));
 
-            MessagingCenter.Subscribe<MealEntryPageViewModel, Meal>(this, MealEntryPageViewModel.MealDeletedMessage, (vm, meal) =>
+            MessagingCenter.Subscribe<MealEntryPageViewModel, Guid>(this, MealEntryPageViewModel.MealDeletedMessage, (vm, id) =>
             {
-                Meals.Remove(meal);
+                Meals.Remove(Meals.SingleOrDefault(x => x.Id == id));
             });
 
             MessagingCenter.Subscribe<MealEntryPageViewModel, Meal>(this, MealEntryPageViewModel.MealSavedMessage, (vm, meal) =>
@@ -44,8 +53,18 @@ namespace HappyBody.ViewModels
                     Meals.Remove(exisingMeal);
                 }
 
-                Meals.Insert(index, meal);
+                Meals.Insert(index, new MealViewModel(meal));
             });
+        }
+
+        async Task ExecuteReactionCommand(MealViewModel meal, MealReactions reaction)
+        {
+            meal.Reaction = reaction;
+
+            var storedMeal = await DataStore.GetItemAsync(meal.Id);
+            storedMeal.Reaction = reaction;
+
+            await DataStore.SaveItemAsync(storedMeal);
         }
 
         async Task ExecuteLoadMealsCommand()
@@ -60,7 +79,7 @@ namespace HappyBody.ViewModels
                 var items = await DataStore.GetItemsAsync(true);
                 foreach (var item in items)
                 {
-                    Meals.Add(item);
+                    Meals.Add(new MealViewModel(item));
                 }
             }
             catch (Exception ex)

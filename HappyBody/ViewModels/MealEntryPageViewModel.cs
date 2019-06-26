@@ -21,41 +21,24 @@ namespace HappyBody.ViewModels
 
         private IDataStore<Meal> _dataStore;
 
-        Meal _meal;
-        public Meal Meal 
-        {
-            get => _meal;
-            set => SetProperty(ref _meal, value);
-        }
+        public MealViewModel Meal { get; set; }
+        public bool ReviewNow { get; set; }
+        public ObservableCollection<Ingredient> Ingredients { get; set; }
 
-        bool _reviewNow;
-        public bool ReviewNow 
-        {
-            get => _reviewNow;
-            set => SetProperty(ref _reviewNow, value);
-        }
-
-        ObservableCollection<Ingredient> _ingredients;
-        public ObservableCollection<Ingredient> Ingredients
-        {
-            get => _ingredients;
-            set => SetProperty(ref _ingredients, value);
-        }
-
-        public ICommand SaveMealCommand { get; set; }
-        public ICommand AddIngredientCommand { get; set; }
-        public ICommand DeleteMealCommand { get; set; }
-        public ICommand DeleteIngredientCommand { get; set; }
+        public ICommand SaveMealCommand { get; private set; }
+        public ICommand AddIngredientCommand { get; private set; }
+        public ICommand DeleteMealCommand { get; private set; }
+        public ICommand DeleteIngredientCommand { get; private set; }
 
         public MealEntryPageViewModel()
         {
-            Meal = new Meal { Description = MealStrings.DefaultMealText };
+            Meal = new MealViewModel { Description = MealStrings.DefaultMealText };
             Ingredients = new ObservableCollection<Ingredient>();
 
             Initialise();
         }
 
-        public MealEntryPageViewModel(Meal meal = null)
+        public MealEntryPageViewModel(MealViewModel meal = null)
         {
             Meal = meal;
 
@@ -89,8 +72,29 @@ namespace HappyBody.ViewModels
             {
                 Meal.Ingredients.Clear();
                 Meal.Ingredients.AddRange(Ingredients);
-                await _dataStore.SaveItemAsync(Meal);
-                MessagingCenter.Send(this, MealSavedMessage, Meal);
+                bool isNew = Meal.Id == Guid.Empty;
+
+                var mealDoc = new Meal
+                {
+                    Description = Meal.Description,
+                    ImgFilename = Meal.ImgFilename,
+                    Ingredients = Ingredients.ToList(),
+                    LastUpdated = Meal.LastUpdated,
+                    MealDate = Meal.MealDate,
+                    Reaction = Meal.Reaction
+                };
+
+                if (isNew)
+                {
+                    await _dataStore.AddItemAsync(mealDoc);
+                }
+                else
+                {
+                    mealDoc.Id = Meal.Id;
+                    await _dataStore.SaveItemAsync(mealDoc);
+                }
+
+                MessagingCenter.Send(this, MealSavedMessage, mealDoc);
             }
             catch (Exception ex)
             {
@@ -112,7 +116,7 @@ namespace HappyBody.ViewModels
             try
             {
                 await _dataStore.DeleteItemAsync(Meal.Id);
-                MessagingCenter.Send(this, MealDeletedMessage, Meal);
+                MessagingCenter.Send(this, MealDeletedMessage, Meal.Id);
             }
             catch (Exception ex)
             {

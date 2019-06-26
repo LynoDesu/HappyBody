@@ -34,7 +34,7 @@ namespace HappyBody.Views
 
         async void OnItemSelected(object sender, SelectionChangedEventArgs args)
         {
-            if (!(args.CurrentSelection.SingleOrDefault() is HappyBody.Core.Models.Meal meal))
+            if (!(args.CurrentSelection.SingleOrDefault() is MealViewModel meal))
                 return;
 
             await Navigation.PushAsync(new MealEntryPage(new MealEntryPageViewModel(meal)));

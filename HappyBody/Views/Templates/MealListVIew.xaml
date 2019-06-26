@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:HappyBody;assembly=HappyBody"
+    xmlns:models="clr-namespace:HappyBody.Core.Models;assembly=HappyBody.Core"
+    x:Class="HappyBody.Views.Templates.MealListView">
+    <Frame Padding="2" CornerRadius="10" Margin="5">
+        <StackLayout Padding="10">
+            <StackLayout Orientation="Horizontal">
+                <Label HorizontalOptions="StartAndExpand" Text="{Binding Description}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Medium" />
+                <Label HorizontalOptions="End" Text="{Binding MealDate, StringFormat='{0:D}'}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemTextStyle}" FontSize="Small" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Image Aspect="AspectFit" WidthRequest="50" HeightRequest="50" Source="{local:ImageResource HappyBody.Resources.breakfast.png}" />
+                <Label HorizontalOptions="StartAndExpand" Text="{Binding IngredientsText}" LineBreakMode="NoWrap" Style="{DynamicResource ListItemDetailTextStyle}" FontSize="13" />
+                <ImageButton x:Name="buttonGoodReaction" WidthRequest="32" HorizontalOptions="End" CommandParameter="{Binding .}" Source="{local:ImageResource HappyBody.Resources.happy.png}" BackgroundColor="Transparent"/>
+                <ImageButton x:Name="buttonNeutralReaction" WidthRequest="32" HorizontalOptions="End" CommandParameter="{Binding .}" Source="{local:ImageResource HappyBody.Resources.neutral.png}" BackgroundColor="Transparent"/>
+                <ImageButton x:Name="buttonBadReaction" WidthRequest="32" HorizontalOptions="End" CommandParameter="{Binding .}" Source="{local:ImageResource HappyBody.Resources.sad.png}" BackgroundColor="Transparent"/>
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentView>
